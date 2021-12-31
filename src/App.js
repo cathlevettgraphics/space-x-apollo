@@ -1,10 +1,17 @@
+import './generics.css';
+import Header from './components/Header';
+import Main from './components/Main';
 import PastLaunches from './components/PastLaunches';
+import Footer from './components/Footer';
 
 function App() {
   return (
     <div>
-      <h1>Space X launches 🚀</h1>
-      <PastLaunches />
+      <Header />
+      <Main>
+        <PastLaunches />
+      </Main>
+      <Footer />
     </div>
   );
 }

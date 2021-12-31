@@ -1,10 +1,11 @@
 import { useQuery, gql } from '@apollo/client';
+import PastLaunch from './PastLaunch';
 
 const SPACE_X_LAUNCHES_PAST = gql`
   query GetLaunchesPast {
     launchesPast(limit: 10) {
       mission_name
-      launch_date_local
+      launch_date_utc
       launch_site {
         site_name_long
       }
@@ -32,35 +33,32 @@ function PastLaunches() {
   if (loading) return <p>Loading ...</p>;
   if (error) return <p>Error: :(</p>;
 
-  return data.launchesPast.map(
-    ({
-      mission_name,
-      launch_date_local,
-      launch_site,
-      links,
-      rocket,
-      ships,
-    }) => (
-      <div key={mission_name}>
-        <img src={links.mission_patch} alt="" width="100" />
-        <h2>{mission_name}</h2>
-        <p>{launch_date_local}</p>
-        <p>{launch_site.site_name_long}</p>
-        <a href={links.article_link}>Read more ...</a>
-        <a href={links.video_link}>Rewatch the launch</a>
-        <div>
-          <p>Support ships: </p>
-          {ships.map((ship) => (
-            <div key={ship.name}>
-              <img src={ship.image} alt="" width="250" />
-              <p>
-                {ship.name}, {ship.home_port}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-    ),
+  return (
+    <section>
+      <ul>
+        {data.launchesPast.map(
+          ({
+            mission_name,
+            launch_date_utc,
+            launch_site,
+            links,
+            rocket,
+            ships,
+          }) => (
+            <PastLaunch
+              key={mission_name}
+              data={data}
+              mission_name={mission_name}
+              launch_date_utc={launch_date_utc}
+              launch_site={launch_site}
+              rocket={rocket}
+              links={links}
+              ships={ships}
+            />
+          ),
+        )}
+      </ul>
+    </section>
   );
 }
 
