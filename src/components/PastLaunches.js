@@ -1,4 +1,5 @@
 import { useQuery, gql } from '@apollo/client';
+import styled from 'styled-components';
 import PastLaunch from './PastLaunch';
 
 const SPACE_X_LAUNCHES_PAST = gql`
@@ -35,6 +36,7 @@ function PastLaunches() {
 
   return (
     <section>
+      <RecentMissions>Most recent missions</RecentMissions>
       <ul>
         {data.launchesPast.map(
           ({
@@ -61,5 +63,11 @@ function PastLaunches() {
     </section>
   );
 }
+
+const RecentMissions = styled.h2`
+  max-width: 342px;
+  margin: 0 auto;
+  margin-bottom: 16px;
+`;
 
 export default PastLaunches;

@@ -5,9 +5,11 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
+  @import url('https://fonts.googleapis.com/css2?family=Spartan:wght@400;500;600;700;800;900&display=swap');
 }
 body {
   font-size: 1.6rem;
+  font-family: 'Spartan', sans-serif;
   margin: 0;
   min-height: 100vh;
 }
